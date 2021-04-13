@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v5.0": {
-      "EMDD.KtMatrix/1.0.0": {
+      "EMDD.KtMatrix/1.0.1-beta": {
         "dependencies": {
           "EMDD.KtExpressions": "1.0.0"
         },
@@ -58,7 +58,7 @@
     }
   },
   "libraries": {
-    "EMDD.KtMatrix/1.0.0": {
+    "EMDD.KtMatrix/1.0.1-beta": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

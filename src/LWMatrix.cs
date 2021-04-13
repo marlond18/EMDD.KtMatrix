@@ -22,7 +22,7 @@ namespace EMDD.KtMatrix.LightWeight
             _ => false
         };
 
-        public bool IsZero => Elements.All(elem => elem.NearZero());
+        public bool IsZero => Elements.All(elem => elem.NearZero(50));
 
         public bool IsSameSizeWith(LWMatrix other) => Size.Equals(other.Size);
 
@@ -50,14 +50,14 @@ namespace EMDD.KtMatrix.LightWeight
         public static LWMatrix operator *(LWMatrix a, double b)
         {
             if (a is null) return null;
-            if (b.NearZero()) return new LWMatrix(new double[a.Size.rows, a.Size.cols]);
+            if (b.NearZero(50)) return new LWMatrix(new double[a.Size.rows, a.Size.cols]);
             return new LWMatrix(a.Elements.Select((elem) => elem * b));
         }
 
         public static LWMatrix operator *(double b, LWMatrix a)
         {
             if (a is null) return null;
-            if (b.NearZero()) return new LWMatrix(new double[a.Size.rows, a.Size.cols]);
+            if (b.NearZero(50)) return new LWMatrix(new double[a.Size.rows, a.Size.cols]);
             return new LWMatrix(a.Elements.Select((elem) => elem * b));
         }
 
@@ -259,7 +259,7 @@ namespace EMDD.KtMatrix.LightWeight
             {
                 if (leadRowIndex == k) continue;
                 var mult = leftArray[k, leadRowIndex];
-                if (mult.NearZero()) continue;
+                if (mult.NearZero(50)) continue;
                 leftArray.Elimination(leftColSize, leadRowIndex, k, mult);
                 rightArray.Elimination(rightColSize, leadRowIndex, k, mult);
             }
@@ -268,7 +268,7 @@ namespace EMDD.KtMatrix.LightWeight
         internal static double GetDivisorOfLeadRow(double[,] leftArray, double[,] rightArray, long RowSize, int leadIndex)
         {
             var divisor = leftArray[leadIndex, leadIndex];
-            if (divisor.NearZero())
+            if (divisor.NearZero(50))
             {
                 var indexOfColNotZero = IndexOfColumnElemNotZero(leadIndex);
                 if (indexOfColNotZero < 0) throw new Exception($"{leftArray} Matrix is Singular, hence gaussian elimination is not possible");
@@ -281,7 +281,7 @@ namespace EMDD.KtMatrix.LightWeight
             {
                 for (int rowIndex = diagonal; rowIndex < RowSize; rowIndex++)
                 {
-                    if (!leftArray[rowIndex, diagonal].NearZero()) return rowIndex;
+                    if (!leftArray[rowIndex, diagonal].NearZero(50)) return rowIndex;
                 }
                 return -1;
             }
