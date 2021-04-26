@@ -5,9 +5,9 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>Marlon Dumal-is</Authors>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.0.1-beta</Version>
+    <Version>1.0.2-beta</Version>
     <Company>EMDD</Company>
-    <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
+    <PackageReleaseNotes>Added MapToNewMatrix on LwMatrix</PackageReleaseNotes>
     <LangVersion>9.0</LangVersion>
     <Description>Collection of Math Matrix Methods</Description>
     <PackageProjectUrl>https://github.com/marlond18/EMDD.KtMatrix.git</PackageProjectUrl>
