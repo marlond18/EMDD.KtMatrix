@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 using KtExtensions;
 
@@ -232,6 +233,36 @@ namespace EMDD.KtMatrix.LightWeight
                 }
             }
             return new LWMatrix(temp);
+        }
+
+        /// <summary>
+        /// place elements into a larger matrix at the given <paramref name="indeces"/>
+        /// </summary>
+        /// <param name="indeces"></param>
+        /// <exception cref="ArgumentNullException"><paramref name="indeces"/> cannot be null</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="indeces"/> should have more than one index, and each indices should be not be less than zero</exception>
+        public  LWMatrix MapToNewMatrix(params (int row, int col)[] indeces)
+        {
+            if (indeces is null) throw new ArgumentNullException(nameof(indeces));
+            if (indeces.Length == 0) throw new ArgumentOutOfRangeException(nameof(indeces), $"{nameof(indeces)} count is <= to zero.");
+            if (indeces.Any(index => index.row < 0 || index.col < 0)) throw new ArgumentOutOfRangeException(nameof(indeces), "index cannot be less than 0");
+            var (rs, cs) = Size;
+            var maxRow = indeces.Max(index => index.row);
+            var maxCol = indeces.Max(index => index.col);
+            var newRow = maxRow + rs;
+            var newCol = maxCol + cs;
+            var newArr = new double[newRow, newCol];
+            for (int i = 0; i < rs; i++)
+            {
+                for (int j = 0; j < cs; j++)
+                {
+                    foreach (var (ir, ic) in indeces)
+                    {
+                        newArr[ir + i, ic + j] = this[i, j];
+                    }
+                }
+            }
+            return new LWMatrix(newArr);
         }
     }
 
