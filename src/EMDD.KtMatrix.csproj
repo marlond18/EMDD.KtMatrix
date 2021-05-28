@@ -36,7 +36,7 @@
 
 
   <ItemGroup>
-    <None Include="..\..\EMDD.Kt.Extensions\src\Images\emd2.png">
+    <None Include="..\..\EMDD.KtMatrix\docs\emd2.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
