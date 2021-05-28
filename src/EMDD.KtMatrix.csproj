@@ -16,6 +16,8 @@
     <PackageIcon>emd2.png</PackageIcon>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Math, Matrix, Linear Algebra, Matrices, EMDD, Mathematics</PackageTags>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

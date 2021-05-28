@@ -96,6 +96,24 @@ namespace MatrixTest
                 { 0.0068357113280509, 0.097412395516784, -0.13109967926899, -0.017826187652207}, {-0.0092640030318555, 0.01172036747212, 0.15713714233579, -0.16064623439331}, { -0.027034045211142, -0.05670692764954, 0.18582747899808, 0.076659625088605}, {0.0083516390969001, -0.086323664615018, 0.29773242471243, 0.099370468884881 }});
             Assert.AreEqual(determinantExpected, determActual);
         }
+        [TestMethod]
+        public void ComplexNumberTest()
+        {
+            var matrix = new EMDD.KtMatrix.Matrix(new EMDD.KtNumerics.Number[,] {
+                { 3, 2,   1},
+                { 3,  new KtComplex(3,1),   3},
+                {-4, 1, 0.4} });
+            var eq = EMDD.KtPolynomials.KtPolynomial.Create(3, -2);
+            var lim = EMDD.KtExpressions.Limits.Limit.Create(3, 4);
+            var exp = new EMDD.KtExpressions.Expression((eq, lim));
+            var comp = new EMDD.KtNumerics.KtComplex(3, 1);
+
+            var matrix2 = new EMDD.KtMatrix.Matrix(new EMDD.KtExpressions.Expression[,] {
+        { 3,       2,    1},
+        { exp,  comp,    3},
+        {-4,       1,  0.4}
+            });
+        }
 
         [TestMethod]
         public void MultiplicationOfExpressionAndNumber()
@@ -128,7 +146,7 @@ namespace MatrixTest
             {
                 var a = xVar;
                 var b = L - xVar;
-                var supportLocation = CommulativeLengths[i+1];
+                var supportLocation = CommulativeLengths[i + 1];
                 var x = Monomial.Create(0, supportLocation);
                 Expressions[i, 0] = RightSideExpression(a, x, 0, supportLocation, L) + LeftSideExpression(a, x, supportLocation, L, L);
                 for (int j = 0; j < beamCount - 1; j++)
